@@ -34,6 +34,12 @@ describe("test SummaryForm component", () => {
     const { button, checkbox } = initialization();
 
     userEvent.click(checkbox);
+    // test('uncontrolled component', () => {
+      // userEvent.type(input, 'myemail@email.com');
+      // useref
+      // useref.current.value
+      // expect(useref.current.value).tobe('myemail@email.com')
+    // })
     expect(button).toBeEnabled();
 
     userEvent.click(checkbox);
