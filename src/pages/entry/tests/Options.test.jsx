@@ -1,12 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import Options from "../Options";
 
 describe("test scoop options function", () => {
   test("displays image for each scoop option from server", async () => {
-    render(<Options optionType="scoops" />, {
-      wrapper: OrderDetailsProvider,
-    });
+    render(<Options optionType="scoops" />);
 
     // find images
     // name for img is alt text
