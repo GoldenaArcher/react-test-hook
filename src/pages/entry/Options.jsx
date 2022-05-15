@@ -32,14 +32,22 @@ const Options = ({ optionType }) => {
   const title = optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
 
   const optionItems = items.map((item) => (
-    <ItemComponent key={item.name} {...item} />
+    <ItemComponent
+      key={item.name}
+      name={item.name}
+      imagePath={item.imagePath}
+      updateItemCount={(itemName, newItemCount) =>
+        updateItemCount(itemName, newItemCount, optionType)
+      }
+    />
   ));
 
   return (
     <>
       <h2>{title}</h2>
       <p>{PRICE_PER_ITEM[optionType]} each</p>
-      <Row>{optionItems}</Row>;
+      <p>{title} total: {orderDetails.totals[optionType]}</p>
+      <Row>{optionItems}</Row>
     </>
   );
 };
