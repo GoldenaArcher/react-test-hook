@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { OrderDetailsProvider } from "../../contexts/OrderDetails";
+import GrandTotal from "./GrandTotal";
 import Options from "./Options";
 
 const OrderEntry = () => {
@@ -9,6 +10,7 @@ const OrderEntry = () => {
       <OrderDetailsProvider>
         <Options optionType="scoops" />
         <Options optionType="toppings" />
+        <GrandTotal />
       </OrderDetailsProvider>
     </Container>
   );
