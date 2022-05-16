@@ -29,4 +29,32 @@ describe("test the total amount of orders", () => {
     userEvent.type(chocoInput, "1");
     expect(scoopsSubtotal).toHaveTextContent("4.00");
   });
+
+  test("update the toppping subtotal", async () => {
+    render(<Options optionType="toppings" />, {
+      wrapper: OrderDetailsProvider,
+    });
+
+    const toppingSubtotal = screen.getByText(/toppings total: \$/i, {
+      exact: false,
+    });
+    expect(toppingSubtotal).toHaveTextContent("0.00");
+
+    const mmCheck = await screen.findByRole("checkbox", {
+      name: /M&Ms/i,
+    });
+    userEvent.clear(mmCheck);
+    userEvent.click(mmCheck);
+    expect(toppingSubtotal).toHaveTextContent("1.50");
+
+    const cherryCheck = await screen.findByRole("checkbox", {
+      name: /cherries/i,
+    });
+    userEvent.clear(cherryCheck);
+    userEvent.click(cherryCheck);
+    expect(toppingSubtotal).toHaveTextContent("3.00");
+
+    userEvent.click(cherryCheck);
+    expect(toppingSubtotal).toHaveTextContent("1.50");
+  });
 });
