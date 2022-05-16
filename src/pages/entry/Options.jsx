@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import { PRICE_PER_ITEM } from "../../constants";
 import { useOrderDetails } from "../../contexts/OrderDetails";
+import { formatCurrency } from "../../utilities";
 import AlertBanner from "../common/AlertBanner";
 import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
@@ -45,8 +46,10 @@ const Options = ({ optionType }) => {
   return (
     <>
       <h2>{title}</h2>
-      <p>{PRICE_PER_ITEM[optionType]} each</p>
-      <p>{title} total: {orderDetails.totals[optionType]}</p>
+      <p>{formatCurrency(PRICE_PER_ITEM[optionType])} each</p>
+      <p>
+        {title} total: {orderDetails.totals[optionType]}
+      </p>
       <Row>{optionItems}</Row>
     </>
   );

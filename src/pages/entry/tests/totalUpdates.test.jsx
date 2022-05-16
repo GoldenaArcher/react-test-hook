@@ -62,13 +62,6 @@ describe("test the total amount of orders", () => {
 });
 
 describe("grand total", () => {
-  test("grand total starts at $0", () => {
-    renderWithContext(<OrderEntry />);
-
-    const grandTotal = screen.getByText(/grand total: \$/i, { exact: false });
-    expect(grandTotal).toHaveTextContent("0.00");
-  });
-
   test("grand total updates properly if scoop is added first", async () => {
     renderWithContext(<OrderEntry />);
 
