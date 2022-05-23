@@ -116,13 +116,14 @@ describe("grand total", () => {
     userEvent.clear(vanillaInput);
     userEvent.type(vanillaInput, "2");
     expect(grandTotal).toHaveTextContent("4.00");
-
+    
     const cherryCheck = await screen.findByRole("checkbox", {
       name: /cherries/i,
     });
     userEvent.click(cherryCheck);
     expect(grandTotal).toHaveTextContent("5.50");
-
+    
+    userEvent.clear(vanillaInput);
     userEvent.type(vanillaInput, "1");
     expect(grandTotal).toHaveTextContent("3.50");
   });

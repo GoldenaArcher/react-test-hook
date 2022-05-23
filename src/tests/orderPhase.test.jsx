@@ -3,7 +3,7 @@ import App from "../App";
 import { render, screen } from "../test-utils/testing-library-utils";
 
 describe("test order phase for happy path", () => {
-  test("path", async () => {
+  test("the whole order sequence", async () => {
     // render
     render(<App />);
 
@@ -82,5 +82,36 @@ describe("test order phase for happy path", () => {
     // happening after test is over
     await screen.findByRole("spinbutton", { name: "Vanilla" });
     await screen.findByRole("checkbox", { name: "Cherries" });
+  });
+
+  test("toppings header is not shown if no topping is ordered", async () => {
+    render(<App />);
+
+    const vanillaInput = await screen.findByRole("spinbutton", {
+      name: /vanilla/i,
+    });
+    userEvent.clear(vanillaInput);
+    userEvent.type(vanillaInput, "1");
+
+    const chocolateInput = await screen.findByRole("spinbutton", {
+      name: /chocolate/i,
+    });
+    userEvent.clear(chocolateInput);
+    userEvent.type(chocolateInput, "2");
+
+    const orderSummaryBtn = screen.getByRole("button", {
+      name: /order sundae/i,
+    });
+    userEvent.click(orderSummaryBtn);
+
+    const scoopsHeading = screen.getByRole("heading", {
+      name: /scoops: \$6.00/i,
+    });
+    expect(scoopsHeading).toBeInTheDocument();
+
+    const toppingsHeading = screen.queryByRole("heading", {
+      name: /toppings/i,
+    });
+    expect(toppingsHeading).not.toBeInTheDocument();
   });
 });
