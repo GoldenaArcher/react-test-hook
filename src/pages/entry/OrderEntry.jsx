@@ -1,17 +1,16 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { OrderDetailsProvider } from "../../contexts/OrderDetails";
 import GrandTotal from "./GrandTotal";
 import Options from "./Options";
+import OrderButton from "./Order";
 
-const OrderEntry = () => {
+const OrderEntry = ({ setOrderPhase }) => {
   return (
     <Container>
-      <OrderDetailsProvider>
-        <Options optionType="scoops" />
-        <Options optionType="toppings" />
-        <GrandTotal />
-      </OrderDetailsProvider>
+      <Options optionType="scoops" />
+      <Options optionType="toppings" />
+      <GrandTotal />
+      <OrderButton setOrderPhase={setOrderPhase} />
     </Container>
   );
 };

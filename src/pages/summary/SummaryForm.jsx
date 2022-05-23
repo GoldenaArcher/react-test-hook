@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Button, Form, OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  OverlayTrigger,
+  Popover,
+  PopoverBody,
+} from "react-bootstrap";
 
-const SummaryForm = () => {
+const SummaryForm = ({ setOrderPhase }) => {
   const [orderConfirm, setOrderConfirm] = useState(false);
 
   const popover = (
@@ -30,7 +36,12 @@ const SummaryForm = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit" disabled={!orderConfirm}>
+      <Button
+        variant="primary"
+        type="submit"
+        disabled={!orderConfirm}
+        onClick={() => setOrderPhase("completed")}
+      >
         Confirm Order
       </Button>
     </Form>
